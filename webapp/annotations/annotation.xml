@@ -1,0 +1,213 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/Service/$metadata">
+        <edmx:Include Namespace="itsys.sjp.crm.Service" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.itsys.sjp.crm">
+            <Annotations Target="itsys.sjp.crm.Service.Deal">
+                 
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n>id}" />
+                            <PropertyValue Property="Value" Path="id" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="deal_status/deal_status"/>
+                            <PropertyValue Property="Label" String="{@i18n>dealstatus}"/>
+                        </Record>
+                        
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n>dealname}" />
+                            <PropertyValue Property="Value" Path="deal_name" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/name"/>
+                            <PropertyValue Property="Label" String="{@i18n>name}"/>
+                        </Record>
+                        
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/lastname"/>
+                            <PropertyValue Property="Label" String="{@i18n>lastname}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/email"/>
+                            <PropertyValue Property="Label" String="{@i18n>email}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/company_name"/>
+                            <PropertyValue Property="Label" String="{@i18n>companyname}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/job"/>
+                            <PropertyValue Property="Label" String="{@i18n>job}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="deal_source/deal_source"/>
+                            <PropertyValue Property="Label" String="{@i18n>dealsource}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ae/ae_name"/>
+                            <PropertyValue Property="Label" String="{@i18n>aename}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="customer/phone"/>
+                            <PropertyValue Property="Label" String="{@i18n>phone}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="last_action/action_date"/>
+                            <PropertyValue Property="Label" String="{@i18n>actiondate}"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup1">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>id}" />
+                                    <PropertyValue Property="Value" Path="id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>dealname}" />
+                                    <PropertyValue Property="Value" Path="deal_name" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>customerid}" />
+                                    <PropertyValue Property="Value" Path="customer_id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>dealstatusid}" />
+                                    <PropertyValue Property="Value" Path="deal_status_id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>dealstageid}" />
+                                    <PropertyValue Property="Value" Path="deal_stage_id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>aeid}" />
+                                    <PropertyValue Property="Value" Path="ae_id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>interestedcourse}" />
+                                    <PropertyValue Property="Value" Path="interested_course" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>dealsourceid}" />
+                                    <PropertyValue Property="Value" Path="deal_source_id" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>priority}" />
+                                    <PropertyValue Property="Value" Path="priority" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>additionalnote}" />
+                                    <PropertyValue Property="Value" Path="additional_note" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>active}" />
+                                    <PropertyValue Property="Value" Path="active" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>note}" />
+                                    <PropertyValue Property="Value" Path="note" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>startdate}" />
+                                    <PropertyValue Property="Value" Path="start_date" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>enddate}" />
+                                    <PropertyValue Property="Value" Path="end_date" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>createdby}" />
+                                    <PropertyValue Property="Value" Path="created_by" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>createdon}" />
+                                    <PropertyValue Property="Value" Path="created_on" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>updatedby}" />
+                                    <PropertyValue Property="Value" Path="updated_by" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="{@i18n>updatedon}" />
+                                    <PropertyValue Property="Value" Path="updated_on" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="last_action/action_status_id"/>
+                                    <PropertyValue Property="Label" String="action_status_id"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="last_action/note"/>
+                                    <PropertyValue Property="Label" String="note"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="GeneratedFacet1" />
+                            <PropertyValue Property="Label" String="{@i18n>generalInformation}" />
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup1" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>created_on</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Accion">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Acciones"/>
+                            <PropertyValue Property="ID" String="Acciones"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Acciones"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Acciones">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="last_action/action_substatus_id"/>
+                                    <PropertyValue Property="Label" String="action_substatus_id"/>
+                                </Record></Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.Deal/created_on">
+                <Annotation Term="Common.Label" String="{@i18n>createdon}"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.DealStatuses">
+                <Annotation Term="UI.DataPoint" Qualifier="id">
+                    <Record>
+                        <PropertyValue Property="Value" Path="id"/>
+                        <PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+                        <PropertyValue Property="TargetValue" Int="100"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

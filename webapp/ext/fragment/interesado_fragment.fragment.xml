@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:l="sap.ui.layout">
+	<l:VerticalLayout  core:require="{handler: 'com/itsys/sjp/crm/itsyscrmdeals/ext/fragment/interesado_fragment'}">
+		<Text text="interesado_fragment" />
+		<Button text="interesado_fragment" press="handler.predefinedMethod" />
+	</l:VerticalLayout>
+</core:FragmentDefinition>

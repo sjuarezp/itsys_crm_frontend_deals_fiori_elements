@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: com-itsys-sjp-crm-itsyscrmdeals
+description: ITSYS CRM DEAL
+version: 0.0.1
+modules:
+- name: com-itsys-sjp-crm-itsyscrmdeals-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: com-itsys-sjp-crm-itsyscrmdeals-dest-srv
+    parameters:
+      content-target: true
+  - name: com-itsys-sjp-crm-itsyscrmdeals-repo-host
+    parameters:
+      service-key:
+        name: com-itsys-sjp-crm-itsyscrmdeals-repo-host-key
+  - name: com-itsys-sjp-crm-itsyscrmdeals-uaa
+    parameters:
+      service-key:
+        name: com-itsys-sjp-crm-itsyscrmdeals-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: com-itsys-sjp-crm-itsyscrmdeals_repo_host
+          ServiceInstanceName: com-itsys-sjp-crm-itsyscrmdeals-html5-srv
+          ServiceKeyName: com-itsys-sjp-crm-itsyscrmdeals-repo-host-key
+          sap.cloud.service: com-itsys-sjp-crm-itsyscrmdeals
+        - Authentication: OAuth2UserTokenExchange
+          Name: com-itsys-sjp-crm-itsyscrmdeals_uaa
+          ServiceInstanceName: com-itsys-sjp-crm-itsyscrmdeals-xsuaa-srv
+          ServiceKeyName: com-itsys-sjp-crm-itsyscrmdeals-uaa-key
+          sap.cloud.service: com-itsys-sjp-crm-itsyscrmdeals
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: com-itsys-sjp-crm-itsyscrmdeals-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: com-itsys-sjp-crm-itsyscrmdeals-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comitsyssjpcrmitsyscrmdeals.zip
+      name: comitsyssjpcrmitsyscrmdeals
+      target-path: resources/
+- name: comitsyssjpcrmitsyscrmdeals
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: com-itsys-sjp-crm-itsyscrmdeals-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: com-itsys-sjp-crm-itsyscrmdeals-dest-srv
+    service-plan: lite
+- name: com-itsys-sjp-crm-itsyscrmdeals-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: com-itsys-sjp-crm-itsyscrmdeals-xsuaa-srv
+    service-plan: application
+- name: com-itsys-sjp-crm-itsyscrmdeals-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: com-itsys-sjp-crm-itsyscrmdeals-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

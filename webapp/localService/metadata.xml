@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="itsys.sjp.crm.Service" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Actions" EntityType="itsys.sjp.crm.Service.Actions">
+                    <NavigationPropertyBinding Path="ae" Target="AccountExecutives"/>
+                    <NavigationPropertyBinding Path="action_status" Target="ActionStatuses"/>
+                    <NavigationPropertyBinding Path="action_substatus" Target="ActionSubstatuses"/>
+                </EntitySet>
+                <EntitySet Name="ActionStatuses" EntityType="itsys.sjp.crm.Service.ActionStatuses"/>
+                <EntitySet Name="ActionSubstatuses" EntityType="itsys.sjp.crm.Service.ActionSubstatuses">
+                    <NavigationPropertyBinding Path="action_status" Target="ActionStatuses"/>
+                </EntitySet>
+                <EntitySet Name="AccountExecutives" EntityType="itsys.sjp.crm.Service.AccountExecutives"/>
+                <EntitySet Name="ActionTypes" EntityType="itsys.sjp.crm.Service.ActionTypes"/>
+                <EntitySet Name="Customers" EntityType="itsys.sjp.crm.Service.Customers"/>
+                <EntitySet Name="DealStatuses" EntityType="itsys.sjp.crm.Service.DealStatuses"/>
+                <EntitySet Name="DealSources" EntityType="itsys.sjp.crm.Service.DealSources"/>
+                <EntitySet Name="DealStages" EntityType="itsys.sjp.crm.Service.DealStages"/>
+                <EntitySet Name="Blacklist" EntityType="itsys.sjp.crm.Service.Blacklist">
+                    <NavigationPropertyBinding Path="customer" Target="Customers"/>
+                </EntitySet>
+                <EntitySet Name="Courses" EntityType="itsys.sjp.crm.Service.Courses"/>
+                <EntitySet Name="Deal" EntityType="itsys.sjp.crm.Service.Deal">
+                    <NavigationPropertyBinding Path="customer" Target="Customers"/>
+                    <NavigationPropertyBinding Path="deal_status" Target="DealStatuses"/>
+                    <NavigationPropertyBinding Path="deal_stage" Target="DealStages"/>
+                    <NavigationPropertyBinding Path="ae" Target="AccountExecutives"/>
+                    <NavigationPropertyBinding Path="deal_source" Target="DealSources"/>
+                    <NavigationPropertyBinding Path="last_action" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="DealAction" EntityType="itsys.sjp.crm.Service.DealAction">
+                    <NavigationPropertyBinding Path="deal" Target="Deal"/>
+                    <NavigationPropertyBinding Path="action" Target="Actions"/>
+                    <NavigationPropertyBinding Path="action_type" Target="ActionTypes"/>
+                    <NavigationPropertyBinding Path="action_status" Target="ActionStatuses"/>
+                    <NavigationPropertyBinding Path="action_substatus" Target="ActionSubstatuses"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Actions">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="ae" Type="itsys.sjp.crm.Service.AccountExecutives">
+                    <ReferentialConstraint Property="ae_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="ae_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="action_status" Type="itsys.sjp.crm.Service.ActionStatuses">
+                    <ReferentialConstraint Property="action_status_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_status_id" Type="Edm.Int32"/>
+                <Property Name="action_date" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="action_substatus" Type="itsys.sjp.crm.Service.ActionSubstatuses">
+                    <ReferentialConstraint Property="action_substatus_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_substatus_id" Type="Edm.Int32"/>
+                <Property Name="answered" Type="Edm.String" MaxLength="1"/>
+                <Property Name="note" Type="Edm.String" MaxLength="100"/>
+                <Property Name="deal_stage" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ActionStatuses">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="action_status" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ActionSubstatuses">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="action_substatus" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="action_status" Type="itsys.sjp.crm.Service.ActionStatuses">
+                    <ReferentialConstraint Property="action_status_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_status_id" Type="Edm.Int32"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="AccountExecutives">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ae_name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ActionTypes">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="action_type" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Customers">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="id_card" Type="Edm.String" MaxLength="20"/>
+                <Property Name="name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="lastname" Type="Edm.String" MaxLength="100"/>
+                <Property Name="email" Type="Edm.String" MaxLength="200"/>
+                <Property Name="phone" Type="Edm.String" MaxLength="50"/>
+                <Property Name="btp_user" Type="Edm.String" MaxLength="20"/>
+                <Property Name="company_name" Type="Edm.String" MaxLength="200"/>
+                <Property Name="company_ruc" Type="Edm.String" MaxLength="20"/>
+                <Property Name="company_use_sap" Type="Edm.String" MaxLength="1"/>
+                <Property Name="job" Type="Edm.String" MaxLength="20"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="DealStatuses">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="deal_status" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="DealSources">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="deal_source" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="DealStages">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="deal_stage" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Blacklist">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="customer" Type="itsys.sjp.crm.Service.Customers">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="note" Type="Edm.String" MaxLength="100"/>
+                <Property Name="start_date" Type="Edm.Date"/>
+                <Property Name="end_date" Type="Edm.Date"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Courses">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="course_name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="Deal">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="deal_name" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="customer" Type="itsys.sjp.crm.Service.Customers">
+                    <ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="customer_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="deal_status" Type="itsys.sjp.crm.Service.DealStatuses">
+                    <ReferentialConstraint Property="deal_status_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deal_status_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="deal_stage" Type="itsys.sjp.crm.Service.DealStages">
+                    <ReferentialConstraint Property="deal_stage_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deal_stage_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="ae" Type="itsys.sjp.crm.Service.AccountExecutives">
+                    <ReferentialConstraint Property="ae_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="ae_id" Type="Edm.Int32"/>
+                <Property Name="interested_course" Type="Edm.Int32"/>
+                <NavigationProperty Name="deal_source" Type="itsys.sjp.crm.Service.DealSources">
+                    <ReferentialConstraint Property="deal_source_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deal_source_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="last_action" Type="itsys.sjp.crm.Service.Actions">
+                    <ReferentialConstraint Property="last_action_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="last_action_id" Type="Edm.Int32"/>
+                <Property Name="priority" Type="Edm.Int32"/>
+                <Property Name="additional_note" Type="Edm.String" MaxLength="500"/>
+                <Property Name="active" Type="Edm.String" MaxLength="1"/>
+                <Property Name="note" Type="Edm.String" MaxLength="100"/>
+                <Property Name="start_date" Type="Edm.Date"/>
+                <Property Name="end_date" Type="Edm.Date"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="200"/>
+                <Property Name="created_on" Type="Edm.Date"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="DealAction">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="deal" Type="itsys.sjp.crm.Service.Deal">
+                    <ReferentialConstraint Property="deal_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="deal_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="action" Type="itsys.sjp.crm.Service.Actions">
+                    <ReferentialConstraint Property="action_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="action_type" Type="itsys.sjp.crm.Service.ActionTypes">
+                    <ReferentialConstraint Property="action_type_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_type_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="action_status" Type="itsys.sjp.crm.Service.ActionStatuses">
+                    <ReferentialConstraint Property="action_status_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_status_id" Type="Edm.Int32"/>
+                <NavigationProperty Name="action_substatus" Type="itsys.sjp.crm.Service.ActionSubstatuses">
+                    <ReferentialConstraint Property="action_substatus_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="action_substatus_id" Type="Edm.Int32"/>
+                <Property Name="reminder" Type="Edm.String" MaxLength="500"/>
+                <Property Name="created_by" Type="Edm.Int32"/>
+                <Property Name="created_on" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="updated_by" Type="Edm.Int32"/>
+                <Property Name="updated_on" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <Annotations Target="itsys.sjp.crm.Service.ActionStatuses/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionStatuses/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionStatuses/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionStatuses/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionSubstatuses/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionSubstatuses/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionSubstatuses/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="itsys.sjp.crm.Service.ActionSubstatuses/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
